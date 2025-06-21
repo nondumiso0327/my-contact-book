@@ -50,3 +50,33 @@ function showPage(pageId) {
     // Show selected page
     document.getElementById(pageId).classList.add('active');
 }
+function showContacts() {
+    showPage('contactsPage');
+}
+
+function showAddContacts() {
+    showPage('addContactPage');
+    // Clear the form
+    document.getElementById('addContactForm').reset();
+}
+
+function showEditContact(contactId) {
+    showPage('editContactPage')
+    // Load contact data for editing
+    loadContactForEdit(contactId);
+}
+function getContacts() {
+    const contactsList = document.getElementById('contactsList');
+    contactsList.innerHTML = '<div class="loading"> Loading contacts...</div>';
+
+    fetch(rootPath + "controller/get-contacts/")
+        .then(function (response){
+            return response.json();
+        })
+        .then(function (data){
+            displayContacts(data);
+        })
+        .catch(function (error){
+            contactsList.innerHTML = '<div class="error">Something went wrong, please try again later.</div>'
+        });
+}
