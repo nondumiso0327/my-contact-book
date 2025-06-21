@@ -41,3 +41,12 @@ function setApiKey() {
             alert('Error validation your API Key. Please try again.');
         });
 }
+// Show different pages
+function showPage(pageId) {
+    // Hide all pages
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(page => page.classList.remove('active'));
+
+    // Show selected page
+    document.getElementById(pageId).classList.add('active');
+}
