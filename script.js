@@ -236,6 +236,11 @@ function deleteContact(contactId) {
 window.onload = function() {
     checkApiKey();
 };
+function resetApiKey() {
+    localStorage.removeItem('apiKey'); // Clear stored key
+    apiKey = ''; // Reset global variable
+    showPage('setupPage'); // Show the API input page again
+}
 
 
 
