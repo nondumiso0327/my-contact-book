@@ -13,3 +13,31 @@ function checkApiKey() {
         getContacts()
     }
 }
+// Set the API Key and store it
+function setApiKey() {
+    const inputApiKey = document.getElementById('apiKeyInput').value.trim();
+
+    if (!inputApiKey){
+        alert('Please enter an API key!');
+        return;
+    }
+
+    // Validate API key first
+    fetch(rootPath + "controller/api-key/?apiKey=" + inputApiKey)
+        .then(function (response) {
+            return response.text();
+        })
+        .then(function (data) {
+            if (data == "1") {
+                apiKey = inputApiKey;
+                localStorage.setItem("apiKey", apiKey);
+                showContacts();
+                getContacts();
+            } else {
+                alert("Invalid API key entered!");
+            }
+        })
+        .catch(function (error) {
+            alert('Error validation your API Key. Please try again.');
+        });
+}
